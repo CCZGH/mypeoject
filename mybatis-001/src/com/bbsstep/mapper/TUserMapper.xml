@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bbsstep.mapper.TUserMapper" >
+  <resultMap id="BaseResultMap" type="com.bbsstep.po.TUser" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="ismobile" property="ismobile" jdbcType="INTEGER" />
+    <result column="iconurl" property="iconurl" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+    <result column="wyname" property="wyname" jdbcType="VARCHAR" />
+    <result column="wypwd" property="wypwd" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="updatedate" property="updatedate" jdbcType="TIMESTAMP" />
+    <result column="bigv" property="bigv" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bbsstep.po.TUser" extends="BaseResultMap" >
+    <result column="hxcontent" property="hxcontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, username, pwd, status, nickname, tel, ismobile, iconurl, usertype, wyname, wypwd, 
+    createdate, updatedate, bigv
+  </sql>
+  <sql id="Blob_Column_List" >
+    hxcontent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.bbsstep.po.TUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bbsstep.po.TUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bbsstep.po.TUserExample" >
+    delete from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bbsstep.po.TUser" >
+    insert into t_user (id, username, pwd, 
+      status, nickname, tel, 
+      ismobile, iconurl, usertype, 
+      wyname, wypwd, createdate, 
+      updatedate, bigv, hxcontent
+      )
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{ismobile,jdbcType=INTEGER}, #{iconurl,jdbcType=VARCHAR}, #{usertype,jdbcType=INTEGER}, 
+      #{wyname,jdbcType=VARCHAR}, #{wypwd,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{updatedate,jdbcType=TIMESTAMP}, #{bigv,jdbcType=INTEGER}, #{hxcontent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bbsstep.po.TUser" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="pwd != null" >
+        pwd,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="ismobile != null" >
+        ismobile,
+      </if>
+      <if test="iconurl != null" >
+        iconurl,
+      </if>
+      <if test="usertype != null" >
+        usertype,
+      </if>
+      <if test="wyname != null" >
+        wyname,
+      </if>
+      <if test="wypwd != null" >
+        wypwd,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="updatedate != null" >
+        updatedate,
+      </if>
+      <if test="bigv != null" >
+        bigv,
+      </if>
+      <if test="hxcontent != null" >
+        hxcontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="ismobile != null" >
+        #{ismobile,jdbcType=INTEGER},
+      </if>
+      <if test="iconurl != null" >
+        #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="wyname != null" >
+        #{wyname,jdbcType=VARCHAR},
+      </if>
+      <if test="wypwd != null" >
+        #{wypwd,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bigv != null" >
+        #{bigv,jdbcType=INTEGER},
+      </if>
+      <if test="hxcontent != null" >
+        #{hxcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bbsstep.po.TUserExample" resultType="java.lang.Integer" >
+    select count(*) from t_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwd != null" >
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.nickname != null" >
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ismobile != null" >
+        ismobile = #{record.ismobile,jdbcType=INTEGER},
+      </if>
+      <if test="record.iconurl != null" >
+        iconurl = #{record.iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usertype != null" >
+        usertype = #{record.usertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.wyname != null" >
+        wyname = #{record.wyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wypwd != null" >
+        wypwd = #{record.wypwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedate != null" >
+        updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bigv != null" >
+        bigv = #{record.bigv,jdbcType=INTEGER},
+      </if>
+      <if test="record.hxcontent != null" >
+        hxcontent = #{record.hxcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_user
+    set id = #{record.id,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      ismobile = #{record.ismobile,jdbcType=INTEGER},
+      iconurl = #{record.iconurl,jdbcType=VARCHAR},
+      usertype = #{record.usertype,jdbcType=INTEGER},
+      wyname = #{record.wyname,jdbcType=VARCHAR},
+      wypwd = #{record.wypwd,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      bigv = #{record.bigv,jdbcType=INTEGER},
+      hxcontent = #{record.hxcontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_user
+    set id = #{record.id,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      ismobile = #{record.ismobile,jdbcType=INTEGER},
+      iconurl = #{record.iconurl,jdbcType=VARCHAR},
+      usertype = #{record.usertype,jdbcType=INTEGER},
+      wyname = #{record.wyname,jdbcType=VARCHAR},
+      wypwd = #{record.wypwd,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      bigv = #{record.bigv,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bbsstep.po.TUser" >
+    update t_user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="ismobile != null" >
+        ismobile = #{ismobile,jdbcType=INTEGER},
+      </if>
+      <if test="iconurl != null" >
+        iconurl = #{iconurl,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        usertype = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="wyname != null" >
+        wyname = #{wyname,jdbcType=VARCHAR},
+      </if>
+      <if test="wypwd != null" >
+        wypwd = #{wypwd,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedate != null" >
+        updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bigv != null" >
+        bigv = #{bigv,jdbcType=INTEGER},
+      </if>
+      <if test="hxcontent != null" >
+        hxcontent = #{hxcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bbsstep.po.TUser" >
+    update t_user
+    set username = #{username,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      ismobile = #{ismobile,jdbcType=INTEGER},
+      iconurl = #{iconurl,jdbcType=VARCHAR},
+      usertype = #{usertype,jdbcType=INTEGER},
+      wyname = #{wyname,jdbcType=VARCHAR},
+      wypwd = #{wypwd,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      bigv = #{bigv,jdbcType=INTEGER},
+      hxcontent = #{hxcontent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bbsstep.po.TUser" >
+    update t_user
+    set username = #{username,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      ismobile = #{ismobile,jdbcType=INTEGER},
+      iconurl = #{iconurl,jdbcType=VARCHAR},
+      usertype = #{usertype,jdbcType=INTEGER},
+      wyname = #{wyname,jdbcType=VARCHAR},
+      wypwd = #{wypwd,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      bigv = #{bigv,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

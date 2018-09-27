@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bbsstep.mapper.TActiveMapper" >
+  <resultMap id="BaseResultMap" type="com.bbsstep.po.TActive" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="userid" property="userid" jdbcType="BIGINT" />
+    <result column="activename" property="activename" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="BIGINT" />
+    <result column="startdate" property="startdate" jdbcType="TIMESTAMP" />
+    <result column="enddate" property="enddate" jdbcType="TIMESTAMP" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="REAL" />
+    <result column="latitude" property="latitude" jdbcType="REAL" />
+    <result column="radius" property="radius" jdbcType="REAL" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="praise" property="praise" jdbcType="VARCHAR" />
+    <result column="steps" property="steps" jdbcType="VARCHAR" />
+    <result column="activestatus" property="activestatus" jdbcType="INTEGER" />
+    <result column="activepower" property="activepower" jdbcType="INTEGER" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="updatedate" property="updatedate" jdbcType="TIMESTAMP" />
+    <result column="activesex" property="activesex" jdbcType="INTEGER" />
+    <result column="joinnum" property="joinnum" jdbcType="INTEGER" />
+    <result column="cost" property="cost" jdbcType="REAL" />
+    <result column="commission" property="commission" jdbcType="REAL" />
+    <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+    <result column="hxgroupid" property="hxgroupid" jdbcType="VARCHAR" />
+    <result column="requireName" property="requirename" jdbcType="CHAR" />
+    <result column="requireComp" property="requirecomp" jdbcType="CHAR" />
+    <result column="requirePosition" property="requireposition" jdbcType="CHAR" />
+    <result column="requireMobile" property="requiremobile" jdbcType="CHAR" />
+    <result column="display_order" property="displayOrder" jdbcType="INTEGER" />
+    <result column="maxnum" property="maxnum" jdbcType="INTEGER" />
+    <result column="recommend" property="recommend" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.bbsstep.po.TActive" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userid, activename, type, startdate, enddate, province, city, address, longitude, 
+    latitude, radius, addr, praise, steps, activestatus, activepower, createdate, updatedate, 
+    activesex, joinnum, cost, commission, isdelete, hxgroupid, requireName, requireComp, 
+    requirePosition, requireMobile, display_order, maxnum, recommend
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.bbsstep.po.TActiveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_active
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bbsstep.po.TActiveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_active
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_active
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_active
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bbsstep.po.TActiveExample" >
+    delete from t_active
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bbsstep.po.TActive" >
+    insert into t_active (id, userid, activename, 
+      type, startdate, enddate, 
+      province, city, address, 
+      longitude, latitude, radius, 
+      addr, praise, steps, 
+      activestatus, activepower, createdate, 
+      updatedate, activesex, joinnum, 
+      cost, commission, isdelete, 
+      hxgroupid, requireName, requireComp, 
+      requirePosition, requireMobile, display_order, 
+      maxnum, recommend, content
+      )
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{activename,jdbcType=VARCHAR}, 
+      #{type,jdbcType=BIGINT}, #{startdate,jdbcType=TIMESTAMP}, #{enddate,jdbcType=TIMESTAMP}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{longitude,jdbcType=REAL}, #{latitude,jdbcType=REAL}, #{radius,jdbcType=REAL}, 
+      #{addr,jdbcType=VARCHAR}, #{praise,jdbcType=VARCHAR}, #{steps,jdbcType=VARCHAR}, 
+      #{activestatus,jdbcType=INTEGER}, #{activepower,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{updatedate,jdbcType=TIMESTAMP}, #{activesex,jdbcType=INTEGER}, #{joinnum,jdbcType=INTEGER}, 
+      #{cost,jdbcType=REAL}, #{commission,jdbcType=REAL}, #{isdelete,jdbcType=INTEGER}, 
+      #{hxgroupid,jdbcType=VARCHAR}, #{requirename,jdbcType=CHAR}, #{requirecomp,jdbcType=CHAR}, 
+      #{requireposition,jdbcType=CHAR}, #{requiremobile,jdbcType=CHAR}, #{displayOrder,jdbcType=INTEGER}, 
+      #{maxnum,jdbcType=INTEGER}, #{recommend,jdbcType=CHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bbsstep.po.TActive" >
+    insert into t_active
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="activename != null" >
+        activename,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="startdate != null" >
+        startdate,
+      </if>
+      <if test="enddate != null" >
+        enddate,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="radius != null" >
+        radius,
+      </if>
+      <if test="addr != null" >
+        addr,
+      </if>
+      <if test="praise != null" >
+        praise,
+      </if>
+      <if test="steps != null" >
+        steps,
+      </if>
+      <if test="activestatus != null" >
+        activestatus,
+      </if>
+      <if test="activepower != null" >
+        activepower,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="updatedate != null" >
+        updatedate,
+      </if>
+      <if test="activesex != null" >
+        activesex,
+      </if>
+      <if test="joinnum != null" >
+        joinnum,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="commission != null" >
+        commission,
+      </if>
+      <if test="isdelete != null" >
+        isdelete,
+      </if>
+      <if test="hxgroupid != null" >
+        hxgroupid,
+      </if>
+      <if test="requirename != null" >
+        requireName,
+      </if>
+      <if test="requirecomp != null" >
+        requireComp,
+      </if>
+      <if test="requireposition != null" >
+        requirePosition,
+      </if>
+      <if test="requiremobile != null" >
+        requireMobile,
+      </if>
+      <if test="displayOrder != null" >
+        display_order,
+      </if>
+      <if test="maxnum != null" >
+        maxnum,
+      </if>
+      <if test="recommend != null" >
+        recommend,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="activename != null" >
+        #{activename,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIGINT},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=REAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=REAL},
+      </if>
+      <if test="radius != null" >
+        #{radius,jdbcType=REAL},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="praise != null" >
+        #{praise,jdbcType=VARCHAR},
+      </if>
+      <if test="steps != null" >
+        #{steps,jdbcType=VARCHAR},
+      </if>
+      <if test="activestatus != null" >
+        #{activestatus,jdbcType=INTEGER},
+      </if>
+      <if test="activepower != null" >
+        #{activepower,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activesex != null" >
+        #{activesex,jdbcType=INTEGER},
+      </if>
+      <if test="joinnum != null" >
+        #{joinnum,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=REAL},
+      </if>
+      <if test="commission != null" >
+        #{commission,jdbcType=REAL},
+      </if>
+      <if test="isdelete != null" >
+        #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="hxgroupid != null" >
+        #{hxgroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="requirename != null" >
+        #{requirename,jdbcType=CHAR},
+      </if>
+      <if test="requirecomp != null" >
+        #{requirecomp,jdbcType=CHAR},
+      </if>
+      <if test="requireposition != null" >
+        #{requireposition,jdbcType=CHAR},
+      </if>
+      <if test="requiremobile != null" >
+        #{requiremobile,jdbcType=CHAR},
+      </if>
+      <if test="displayOrder != null" >
+        #{displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="maxnum != null" >
+        #{maxnum,jdbcType=INTEGER},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=CHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bbsstep.po.TActiveExample" resultType="java.lang.Integer" >
+    select count(*) from t_active
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_active
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.activename != null" >
+        activename = #{record.activename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=BIGINT},
+      </if>
+      <if test="record.startdate != null" >
+        startdate = #{record.startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enddate != null" >
+        enddate = #{record.enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        longitude = #{record.longitude,jdbcType=REAL},
+      </if>
+      <if test="record.latitude != null" >
+        latitude = #{record.latitude,jdbcType=REAL},
+      </if>
+      <if test="record.radius != null" >
+        radius = #{record.radius,jdbcType=REAL},
+      </if>
+      <if test="record.addr != null" >
+        addr = #{record.addr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.praise != null" >
+        praise = #{record.praise,jdbcType=VARCHAR},
+      </if>
+      <if test="record.steps != null" >
+        steps = #{record.steps,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activestatus != null" >
+        activestatus = #{record.activestatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.activepower != null" >
+        activepower = #{record.activepower,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null" >
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedate != null" >
+        updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.activesex != null" >
+        activesex = #{record.activesex,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinnum != null" >
+        joinnum = #{record.joinnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.cost != null" >
+        cost = #{record.cost,jdbcType=REAL},
+      </if>
+      <if test="record.commission != null" >
+        commission = #{record.commission,jdbcType=REAL},
+      </if>
+      <if test="record.isdelete != null" >
+        isdelete = #{record.isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.hxgroupid != null" >
+        hxgroupid = #{record.hxgroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requirename != null" >
+        requireName = #{record.requirename,jdbcType=CHAR},
+      </if>
+      <if test="record.requirecomp != null" >
+        requireComp = #{record.requirecomp,jdbcType=CHAR},
+      </if>
+      <if test="record.requireposition != null" >
+        requirePosition = #{record.requireposition,jdbcType=CHAR},
+      </if>
+      <if test="record.requiremobile != null" >
+        requireMobile = #{record.requiremobile,jdbcType=CHAR},
+      </if>
+      <if test="record.displayOrder != null" >
+        display_order = #{record.displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxnum != null" >
+        maxnum = #{record.maxnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.recommend != null" >
+        recommend = #{record.recommend,jdbcType=CHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_active
+    set id = #{record.id,jdbcType=BIGINT},
+      userid = #{record.userid,jdbcType=BIGINT},
+      activename = #{record.activename,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=BIGINT},
+      startdate = #{record.startdate,jdbcType=TIMESTAMP},
+      enddate = #{record.enddate,jdbcType=TIMESTAMP},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=REAL},
+      latitude = #{record.latitude,jdbcType=REAL},
+      radius = #{record.radius,jdbcType=REAL},
+      addr = #{record.addr,jdbcType=VARCHAR},
+      praise = #{record.praise,jdbcType=VARCHAR},
+      steps = #{record.steps,jdbcType=VARCHAR},
+      activestatus = #{record.activestatus,jdbcType=INTEGER},
+      activepower = #{record.activepower,jdbcType=INTEGER},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      activesex = #{record.activesex,jdbcType=INTEGER},
+      joinnum = #{record.joinnum,jdbcType=INTEGER},
+      cost = #{record.cost,jdbcType=REAL},
+      commission = #{record.commission,jdbcType=REAL},
+      isdelete = #{record.isdelete,jdbcType=INTEGER},
+      hxgroupid = #{record.hxgroupid,jdbcType=VARCHAR},
+      requireName = #{record.requirename,jdbcType=CHAR},
+      requireComp = #{record.requirecomp,jdbcType=CHAR},
+      requirePosition = #{record.requireposition,jdbcType=CHAR},
+      requireMobile = #{record.requiremobile,jdbcType=CHAR},
+      display_order = #{record.displayOrder,jdbcType=INTEGER},
+      maxnum = #{record.maxnum,jdbcType=INTEGER},
+      recommend = #{record.recommend,jdbcType=CHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_active
+    set id = #{record.id,jdbcType=BIGINT},
+      userid = #{record.userid,jdbcType=BIGINT},
+      activename = #{record.activename,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=BIGINT},
+      startdate = #{record.startdate,jdbcType=TIMESTAMP},
+      enddate = #{record.enddate,jdbcType=TIMESTAMP},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=REAL},
+      latitude = #{record.latitude,jdbcType=REAL},
+      radius = #{record.radius,jdbcType=REAL},
+      addr = #{record.addr,jdbcType=VARCHAR},
+      praise = #{record.praise,jdbcType=VARCHAR},
+      steps = #{record.steps,jdbcType=VARCHAR},
+      activestatus = #{record.activestatus,jdbcType=INTEGER},
+      activepower = #{record.activepower,jdbcType=INTEGER},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      updatedate = #{record.updatedate,jdbcType=TIMESTAMP},
+      activesex = #{record.activesex,jdbcType=INTEGER},
+      joinnum = #{record.joinnum,jdbcType=INTEGER},
+      cost = #{record.cost,jdbcType=REAL},
+      commission = #{record.commission,jdbcType=REAL},
+      isdelete = #{record.isdelete,jdbcType=INTEGER},
+      hxgroupid = #{record.hxgroupid,jdbcType=VARCHAR},
+      requireName = #{record.requirename,jdbcType=CHAR},
+      requireComp = #{record.requirecomp,jdbcType=CHAR},
+      requirePosition = #{record.requireposition,jdbcType=CHAR},
+      requireMobile = #{record.requiremobile,jdbcType=CHAR},
+      display_order = #{record.displayOrder,jdbcType=INTEGER},
+      maxnum = #{record.maxnum,jdbcType=INTEGER},
+      recommend = #{record.recommend,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bbsstep.po.TActive" >
+    update t_active
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="activename != null" >
+        activename = #{activename,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=BIGINT},
+      </if>
+      <if test="startdate != null" >
+        startdate = #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        enddate = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=REAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=REAL},
+      </if>
+      <if test="radius != null" >
+        radius = #{radius,jdbcType=REAL},
+      </if>
+      <if test="addr != null" >
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="praise != null" >
+        praise = #{praise,jdbcType=VARCHAR},
+      </if>
+      <if test="steps != null" >
+        steps = #{steps,jdbcType=VARCHAR},
+      </if>
+      <if test="activestatus != null" >
+        activestatus = #{activestatus,jdbcType=INTEGER},
+      </if>
+      <if test="activepower != null" >
+        activepower = #{activepower,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedate != null" >
+        updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activesex != null" >
+        activesex = #{activesex,jdbcType=INTEGER},
+      </if>
+      <if test="joinnum != null" >
+        joinnum = #{joinnum,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=REAL},
+      </if>
+      <if test="commission != null" >
+        commission = #{commission,jdbcType=REAL},
+      </if>
+      <if test="isdelete != null" >
+        isdelete = #{isdelete,jdbcType=INTEGER},
+      </if>
+      <if test="hxgroupid != null" >
+        hxgroupid = #{hxgroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="requirename != null" >
+        requireName = #{requirename,jdbcType=CHAR},
+      </if>
+      <if test="requirecomp != null" >
+        requireComp = #{requirecomp,jdbcType=CHAR},
+      </if>
+      <if test="requireposition != null" >
+        requirePosition = #{requireposition,jdbcType=CHAR},
+      </if>
+      <if test="requiremobile != null" >
+        requireMobile = #{requiremobile,jdbcType=CHAR},
+      </if>
+      <if test="displayOrder != null" >
+        display_order = #{displayOrder,jdbcType=INTEGER},
+      </if>
+      <if test="maxnum != null" >
+        maxnum = #{maxnum,jdbcType=INTEGER},
+      </if>
+      <if test="recommend != null" >
+        recommend = #{recommend,jdbcType=CHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bbsstep.po.TActive" >
+    update t_active
+    set userid = #{userid,jdbcType=BIGINT},
+      activename = #{activename,jdbcType=VARCHAR},
+      type = #{type,jdbcType=BIGINT},
+      startdate = #{startdate,jdbcType=TIMESTAMP},
+      enddate = #{enddate,jdbcType=TIMESTAMP},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=REAL},
+      latitude = #{latitude,jdbcType=REAL},
+      radius = #{radius,jdbcType=REAL},
+      addr = #{addr,jdbcType=VARCHAR},
+      praise = #{praise,jdbcType=VARCHAR},
+      steps = #{steps,jdbcType=VARCHAR},
+      activestatus = #{activestatus,jdbcType=INTEGER},
+      activepower = #{activepower,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      activesex = #{activesex,jdbcType=INTEGER},
+      joinnum = #{joinnum,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=REAL},
+      commission = #{commission,jdbcType=REAL},
+      isdelete = #{isdelete,jdbcType=INTEGER},
+      hxgroupid = #{hxgroupid,jdbcType=VARCHAR},
+      requireName = #{requirename,jdbcType=CHAR},
+      requireComp = #{requirecomp,jdbcType=CHAR},
+      requirePosition = #{requireposition,jdbcType=CHAR},
+      requireMobile = #{requiremobile,jdbcType=CHAR},
+      display_order = #{displayOrder,jdbcType=INTEGER},
+      maxnum = #{maxnum,jdbcType=INTEGER},
+      recommend = #{recommend,jdbcType=CHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bbsstep.po.TActive" >
+    update t_active
+    set userid = #{userid,jdbcType=BIGINT},
+      activename = #{activename,jdbcType=VARCHAR},
+      type = #{type,jdbcType=BIGINT},
+      startdate = #{startdate,jdbcType=TIMESTAMP},
+      enddate = #{enddate,jdbcType=TIMESTAMP},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=REAL},
+      latitude = #{latitude,jdbcType=REAL},
+      radius = #{radius,jdbcType=REAL},
+      addr = #{addr,jdbcType=VARCHAR},
+      praise = #{praise,jdbcType=VARCHAR},
+      steps = #{steps,jdbcType=VARCHAR},
+      activestatus = #{activestatus,jdbcType=INTEGER},
+      activepower = #{activepower,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      activesex = #{activesex,jdbcType=INTEGER},
+      joinnum = #{joinnum,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=REAL},
+      commission = #{commission,jdbcType=REAL},
+      isdelete = #{isdelete,jdbcType=INTEGER},
+      hxgroupid = #{hxgroupid,jdbcType=VARCHAR},
+      requireName = #{requirename,jdbcType=CHAR},
+      requireComp = #{requirecomp,jdbcType=CHAR},
+      requirePosition = #{requireposition,jdbcType=CHAR},
+      requireMobile = #{requiremobile,jdbcType=CHAR},
+      display_order = #{displayOrder,jdbcType=INTEGER},
+      maxnum = #{maxnum,jdbcType=INTEGER},
+      recommend = #{recommend,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
